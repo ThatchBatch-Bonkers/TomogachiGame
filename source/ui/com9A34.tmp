@@ -1,0 +1,601 @@
+[gd_scene load_steps=27 format=3 uid="uid://covnlf81o1vpb"]
+
+[ext_resource type="Script" path="res://source/ui/computer.gd" id="1_0qtuq"]
+[ext_resource type="Texture2D" uid="uid://bgq2pwa0i3v3l" path="res://assets/img/UI/desktopbg.png" id="1_xk5u5"]
+[ext_resource type="Texture2D" uid="uid://cj02tmjc5f21w" path="res://assets/img/UI/pcboarder.png" id="2_pl3y4"]
+[ext_resource type="Texture2D" uid="uid://k2vxwnrk2xq8" path="res://assets/img/UI/guestbook.png" id="3_qw5oo"]
+[ext_resource type="Texture2D" uid="uid://d1w0so4m4m2ow" path="res://assets/img/UI/file.png" id="4_0nmrn"]
+[ext_resource type="Texture2D" uid="uid://metbf0ghkf7g" path="res://assets/img/UI/shopwindow.png" id="4_pjqif"]
+[ext_resource type="Texture2D" uid="uid://b4p2io2d5v0ve" path="res://assets/img/UI/shopbasket.png" id="5_qeypx"]
+[ext_resource type="Texture2D" uid="uid://c11x6nsmrwr31" path="res://assets/img/UI/reviewstar.png" id="6_msmab"]
+[ext_resource type="Texture2D" uid="uid://ejunwhnvhvsm" path="res://assets/img/UI/bin.png" id="7_pj6x8"]
+[ext_resource type="Texture2D" uid="uid://dm6jggkqy6kji" path="res://assets/img/UI/powerbutton.png" id="8_ac1i6"]
+[ext_resource type="Script" path="res://source/ui/FoodShop.gd" id="11_llelh"]
+[ext_resource type="PackedScene" uid="uid://ywfy0nxoj4an" path="res://source/inventory/item_ui_slot.tscn" id="13_ova5w"]
+[ext_resource type="Texture2D" uid="uid://d2i8wlqqqv23s" path="res://assets/img/coin.png" id="14_w0mfg"]
+[ext_resource type="Script" path="res://source/ui/StatsView.gd" id="15_3ascn"]
+[ext_resource type="FontFile" uid="uid://denthodlb7iy2" path="res://assets/fonts/EnterCommand-Bold.ttf" id="15_vb7wd"]
+[ext_resource type="Script" path="res://source/ui/ReviewsView.gd" id="16_mrjfw"]
+
+[sub_resource type="Animation" id="Animation_vpbpy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hpwv3"]
+resource_name = "ZoomIn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wle5p"]
+resource_name = "ZoomOut"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.00999999, 0.00999999)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_parca"]
+_data = {
+"RESET": SubResource("Animation_vpbpy"),
+"ZoomIn": SubResource("Animation_hpwv3"),
+"ZoomOut": SubResource("Animation_wle5p")
+}
+
+[sub_resource type="Animation" id="Animation_xf8xd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ComputerPanel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_fbr1d"]
+resource_name = "TransIn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -500), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_or0bm"]
+resource_name = "TransOut"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -500)]
+}
+
+[sub_resource type="Animation" id="Animation_pmuwf"]
+resource_name = "ZoomIn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ComputerPanel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_qmyax"]
+resource_name = "ZoomOut"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ComputerPanel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(0.01, 0.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jqw23"]
+_data = {
+"RESET": SubResource("Animation_xf8xd"),
+"TransIn": SubResource("Animation_fbr1d"),
+"TransOut": SubResource("Animation_or0bm"),
+"ZoomIn": SubResource("Animation_pmuwf"),
+"ZoomOut": SubResource("Animation_qmyax")
+}
+
+[node name="Computer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_0qtuq")
+
+[node name="ComputerPanel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="BackgroundTexture" type="TextureRect" parent="ComputerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xk5u5")
+
+[node name="PcBoarder" type="TextureRect" parent="ComputerPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.5
+offset_top = -135.0
+offset_right = 171.5
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pl3y4")
+
+[node name="ComputerButtons" type="HBoxContainer" parent="ComputerPanel"]
+layout_mode = 0
+offset_left = -162.0
+offset_top = 95.0
+offset_right = 38.0
+offset_bottom = 127.0
+
+[node name="PowerButton" type="TextureButton" parent="ComputerPanel/ComputerButtons"]
+layout_mode = 2
+texture_normal = ExtResource("8_ac1i6")
+stretch_mode = 3
+
+[node name="BackButton" type="TextureButton" parent="ComputerPanel/ComputerButtons"]
+self_modulate = Color(1, 0.556863, 0.227451, 1)
+layout_mode = 2
+texture_normal = ExtResource("8_ac1i6")
+stretch_mode = 3
+flip_v = true
+
+[node name="Desktop" type="Control" parent="ComputerPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -127.0
+offset_right = 163.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ComputerPanel/Desktop"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 18.0
+offset_right = 57.0
+offset_bottom = 144.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="GuestBookButton" type="TextureButton" parent="ComputerPanel/Desktop/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_qw5oo")
+
+[node name="StatsButton" type="TextureButton" parent="ComputerPanel/Desktop/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_0nmrn")
+
+[node name="ShopButton" type="TextureButton" parent="ComputerPanel/Desktop/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_qeypx")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ComputerPanel/Desktop"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 18.0
+offset_right = -7.0
+offset_bottom = 207.0
+grow_horizontal = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ReviewsButton" type="TextureButton" parent="ComputerPanel/Desktop/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("6_msmab")
+stretch_mode = 3
+
+[node name="ContainerSpacer" type="Control" parent="ComputerPanel/Desktop/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BinButton" type="TextureButton" parent="ComputerPanel/Desktop/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("7_pj6x8")
+stretch_mode = 3
+
+[node name="RoomsButton" type="Button" parent="ComputerPanel/Desktop"]
+layout_mode = 0
+offset_left = 72.3333
+offset_top = 15.6667
+offset_right = 133.333
+offset_bottom = 46.6667
+text = "Rooms"
+
+[node name="FoodShop" type="Control" parent="ComputerPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -127.0
+offset_right = 163.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_llelh")
+
+[node name="ShopTexture" type="TextureRect" parent="ComputerPanel/FoodShop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -111.0
+offset_right = 200.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_pjqif")
+
+[node name="GridContainer" type="GridContainer" parent="ComputerPanel/FoodShop"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -76.0
+offset_right = 159.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="ItemUISlot" parent="ComputerPanel/FoodShop/GridContainer" instance=ExtResource("13_ova5w")]
+layout_mode = 2
+
+[node name="ItemUISlot2" parent="ComputerPanel/FoodShop/GridContainer" instance=ExtResource("13_ova5w")]
+layout_mode = 2
+
+[node name="ItemUISlot3" parent="ComputerPanel/FoodShop/GridContainer" instance=ExtResource("13_ova5w")]
+layout_mode = 2
+
+[node name="ItemUISlot4" parent="ComputerPanel/FoodShop/GridContainer" instance=ExtResource("13_ova5w")]
+layout_mode = 2
+
+[node name="SelectedItemLabel" type="Label" parent="ComputerPanel/FoodShop"]
+layout_mode = 0
+offset_left = 4.33333
+offset_top = 167.667
+offset_right = 74.3333
+offset_bottom = 190.667
+text = "Selected:"
+
+[node name="SelectedItemSprite" type="Sprite2D" parent="ComputerPanel/FoodShop"]
+position = Vector2(91, 174.333)
+texture = ExtResource("14_w0mfg")
+
+[node name="ItemPrice" type="Label" parent="ComputerPanel/FoodShop"]
+layout_mode = 0
+offset_left = 107.667
+offset_top = 168.333
+offset_right = 147.667
+offset_bottom = 191.333
+
+[node name="Button" type="Button" parent="ComputerPanel/FoodShop"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 155.667
+offset_right = 311.0
+offset_bottom = 186.667
+text = "Purchase"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ComputerPanel/FoodShop"]
+libraries = {
+"": SubResource("AnimationLibrary_parca")
+}
+
+[node name="RoomExpandShop" type="Control" parent="ComputerPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -127.0
+offset_right = 163.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_llelh")
+
+[node name="ShopTexture" type="TextureRect" parent="ComputerPanel/RoomExpandShop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -111.0
+offset_right = 200.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_pjqif")
+
+[node name="ItemPrice" type="Label" parent="ComputerPanel/RoomExpandShop"]
+layout_mode = 0
+offset_left = 107.667
+offset_top = 168.333
+offset_right = 147.667
+offset_bottom = 191.333
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ComputerPanel/RoomExpandShop"]
+libraries = {
+"": SubResource("AnimationLibrary_parca")
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ComputerPanel/RoomExpandShop"]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 322.0
+offset_bottom = 154.0
+
+[node name="Label" type="Label" parent="ComputerPanel/RoomExpandShop/VBoxContainer"]
+layout_mode = 2
+text = "Buy an extra hotel room for:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ComputerPanel/RoomExpandShop/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PriceLabel" type="Label" parent="ComputerPanel/RoomExpandShop/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "8"
+
+[node name="SelectedItemSprite" type="TextureRect" parent="ComputerPanel/RoomExpandShop/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_w0mfg")
+
+[node name="Button" type="Button" parent="ComputerPanel/RoomExpandShop/VBoxContainer"]
+layout_mode = 2
+text = "Purchase"
+
+[node name="StatsView" type="Control" parent="ComputerPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -127.0
+offset_right = 164.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_3ascn")
+
+[node name="ColorRect" type="ColorRect" parent="ComputerPanel/StatsView"]
+modulate = Color(0, 0.0862745, 0.345098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ComputerPanel/StatsView"]
+libraries = {
+"": SubResource("AnimationLibrary_parca")
+}
+
+[node name="StatsTextContainer" type="VBoxContainer" parent="ComputerPanel/StatsView"]
+layout_mode = 0
+offset_left = 7.33333
+offset_top = 5.0
+offset_right = 164.333
+offset_bottom = 228.0
+
+[node name="Label" type="Label" parent="ComputerPanel/StatsView/StatsTextContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+text = "Stats:"
+uppercase = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Label2" type="Label" parent="ComputerPanel/StatsView/StatsTextContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+text = "Stats:"
+uppercase = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Label3" type="Label" parent="ComputerPanel/StatsView/StatsTextContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+text = "Stats:"
+uppercase = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Label4" type="Label" parent="ComputerPanel/StatsView/StatsTextContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+text = "Stats:"
+uppercase = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Label5" type="Label" parent="ComputerPanel/StatsView/StatsTextContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+text = "Stats:"
+uppercase = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Label6" type="Label" parent="ComputerPanel/StatsView/StatsTextContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+uppercase = true
+
+[node name="ReviewsView" type="Control" parent="ComputerPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_left = -164.0
+offset_top = -127.0
+offset_right = 164.0
+offset_bottom = 97.0
+script = ExtResource("16_mrjfw")
+
+[node name="ColorRect" type="ColorRect" parent="ComputerPanel/ReviewsView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0980392, 1, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ComputerPanel/ReviewsView"]
+libraries = {
+"": SubResource("AnimationLibrary_parca")
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ComputerPanel/ReviewsView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReviewsContainer" type="VBoxContainer" parent="ComputerPanel/ReviewsView/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ComputerPanel/ReviewsView/ScrollContainer/ReviewsContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("15_vb7wd")
+text = "You Have no reviews yet."
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jqw23")
+}
+
+[connection signal="pressed" from="ComputerPanel/ComputerButtons/PowerButton" to="." method="_on_power_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/ComputerButtons/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/Desktop/VBoxContainer/StatsButton" to="." method="_on_stats_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/Desktop/VBoxContainer/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/Desktop/VBoxContainer2/ReviewsButton" to="." method="_on_reviews_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/Desktop/RoomsButton" to="." method="_on_rooms_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/FoodShop/Button" to="ComputerPanel/FoodShop" method="_on_button_pressed"]
+[connection signal="pressed" from="ComputerPanel/RoomExpandShop/VBoxContainer/Button" to="ComputerPanel/RoomExpandShop" method="_on_button_pressed"]
