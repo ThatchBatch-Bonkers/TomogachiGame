@@ -19,13 +19,17 @@ extends CanvasLayer
 @onready var roomExpandPage = $ComputerPanel/RoomExpandShop
 @onready var backButton = $ComputerPanel/ComputerButtons/BackButton
 
+# KNOWLEDGE CHECK 4
+# New Change To Add CareGuide! Also part of final project.
+@onready var careGuidePage = $ComputerPanel/CareView
+
 # ==========================================
 # STATE & PAGE TRACKING
 # ==========================================
 var computer_active = false
 
 # Array storing references to computer sub-pages.
-@onready var pages = [desktopPage, foodShopPage, statsViewPage, ReviewsViewPage]
+@onready var pages = [desktopPage, roomExpandPage, foodShopPage, statsViewPage, ReviewsViewPage, careGuidePage]
 
 # Tracks which sub-page is currently visible on the computer monitor (defaults to the home Desktop page).
 @onready var current_page: Control = desktopPage
@@ -103,3 +107,9 @@ func _on_reviews_button_pressed():
 func _on_rooms_button_pressed():
 	switch_page(roomExpandPage)
 	roomExpandPage.update()
+
+# KNOWLEDGE CHECK 4
+# Opens the careGuide
+func _on_care_button_pressed():
+	switch_page(careGuidePage)
+	careGuidePage.update()

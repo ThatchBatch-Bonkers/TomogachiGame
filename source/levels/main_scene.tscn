@@ -38,6 +38,7 @@ offset_bottom = 40.0
 script = ExtResource("5_osg2h")
 
 [node name="PetXpLabel" type="Label" parent="DebugInterface" unique_id=838838404]
+visible = false
 layout_mode = 0
 offset_left = 322.0
 offset_top = 157.0
@@ -46,7 +47,6 @@ offset_bottom = 180.0
 script = ExtResource("6_n53xp")
 
 [node name="InvUI" parent="." unique_id=340762550 instance=ExtResource("7_7jc1n")]
-visible = false
 
 [node name="Computer" parent="." unique_id=868031817 instance=ExtResource("8_th8ct")]
 visible = false
