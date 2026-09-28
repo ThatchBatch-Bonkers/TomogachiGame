@@ -617,22 +617,26 @@ offset_right = 124.0
 offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.77131206, 0.8888296, 3.85046e-07, 1)
+color = Color(0.72125596, 0.7184467, 0.6869238, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ComputerPanel/CareView" unique_id=2084964336]
 libraries/ = SubResource("AnimationLibrary_parca")
 
 [node name="GuideTextContainer" type="VBoxContainer" parent="ComputerPanel/CareView" unique_id=1127073918]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+custom_maximum_size = Vector2(328, 224)
 layout_mode = 0
-offset_left = 7.33333
-offset_top = 5.0
-offset_right = 164.333
-offset_bottom = 228.0
+offset_left = -160.0
+offset_top = -125.0
+offset_right = 168.0
+offset_bottom = 99.0
 
 [node name="Label" type="Label" parent="ComputerPanel/CareView/GuideTextContainer" unique_id=402519030]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("15_vb7wd")
 text = "Stats:"
+autowrap_mode = 2
 uppercase = true
 visible_characters = 0
 visible_ratio = 0.0
