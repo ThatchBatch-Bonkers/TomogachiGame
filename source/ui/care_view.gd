@@ -34,10 +34,10 @@ func update():
 # ==========================================
 # Reads global tracking variables and updates text strings for each statistics label.
 func set_text():
-	careLabels[0].text = 'Text that works'
+	careLabels[0].text = 'Each of the 6 buttons increase the corresponding stat bars, giving you more money. The cleanliness bar will not go above a certain point with poops, and the rest bar actually shows how much the animal can sleep! ->                                 (Green = Can Sleep Lots || Red = Enough Sleep)'
 
 
-# Dynamically hides text across all labels by setting their visible character count to 0.
+# Dynamically hides text across all labels by setting their visible character count to 0
 func hide_text():
 	for careLabel in careLabels:
 		careLabel.visible_characters = 0
