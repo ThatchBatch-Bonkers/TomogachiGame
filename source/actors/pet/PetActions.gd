@@ -32,6 +32,11 @@ var poop_counter = 0
 var feed_limit = 4
 var pet_limit = 3
 
+# PROJECT 2 ADDITIONS
+# Boolean used for the petting timer, not allowing user to pet while timer going
+var canPet = true
+
+
 # ==========================================
 # SIGNALS
 # ==========================================
@@ -160,25 +165,32 @@ func handle_food_reaction():
 # INTERACTION ACTIONS
 # ==========================================
 func petting():
-	pet_counter += 1
 	
-	# Penalty for over-petting (pet gets annoyed).
-	if pet_counter > pet_limit:
-		print('dont want pets now')
-		reaction_popup('sick')
-		pet.pet_stats.happiness -= 5
-		return
+	if canPet == true:
+	
+		pet_counter += 1
+	
+		# Penalty for over-petting (pet gets annoyed).
+		if pet_counter > pet_limit:
+			print('dont want pets now')
+			reaction_popup('sick')
+			
+			# PROJECT 2 CHANGES
+			# Instead of not being able to pet the animal forever, you are put on a timer until you can pet them again
+			pet.pet_stats.happiness -= 10
+			canPet = false
+			await get_tree().create_timer(20).timeout
+			canPet = true
+			#print('Timer Ends.')
+			pet_counter = 0;
+			return
 		
-	if pet_counter == pet_limit:
-		reaction_popup('sick')
-		print('enough pets')
-		pet.pet_stats.happiness += 5
-		return
 		
-	# Normal successful petting.
-	reaction_popup('love')
-	pet.pet_stats.happiness += 15
-	pet.gain_experience(2)
+		# Normal successful petting.
+		reaction_popup('love')
+		pet.pet_stats.happiness += 15
+		pet.gain_experience(2)
+	
 
 func clean():
 	# If pet is already clean (>90 or >70), cleaning annoys them slightly.
