@@ -45,6 +45,9 @@ func update_pet(new_pet: Node):
 	# Connect the "selectedAction" signal directly to the new pet's "pet_action" handler function in PetActions.gd!
 	connect("selectedAction", Callable(pet.pet_actions, "pet_action"))
 
+# PROJECT 2 ADDITIONS
+#petTimer.connect()
+
 # ==========================================
 # UI BUTTON CALLBACKS
 # ==========================================
